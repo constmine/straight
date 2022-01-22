@@ -1,0 +1,10 @@
+name: Straight
+version: '${project.version}'
+main: com.github.constmine.plugin.straight.Straight
+api-version: 1.18
+authors: [ constmine ]
+description: 각별님이 만드신 "직진"영상을 참고하여 만들어 보았습니다.
+
+commands:
+  st:
+  test:

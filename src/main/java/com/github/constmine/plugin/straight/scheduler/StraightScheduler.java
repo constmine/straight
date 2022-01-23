@@ -110,6 +110,7 @@ public class StraightScheduler implements Runnable {
 
     public void entityUp() {
         for(Entity entity : player.getNearbyEntities(2, 4, 2)) {
+
             entity.setVelocity(new Vector(0, 2.5, 0));
         }
     }

@@ -13,26 +13,28 @@ import java.util.Objects;
 public class KnockBackEvent implements Listener {
     private final FileConfiguration config;
 
-
     public KnockBackEvent(Plugin plugin) {
         config = plugin.getConfig();
     }
 
-    /*
-    Owner권한을 config파일로 저장함.
-    ...문제는 Owner 권한이 이미 있는 상태에서
-     */
     @EventHandler
     public void onKnockBack(EntityKnockbackByEntityEvent event) {
         Entity entity = event.getEntity();
+
         if (entity instanceof Player) {
-            if(Objects.requireNonNull(config.getString("Owner")).equalsIgnoreCase(entity.getName())) {
-                Player player = (Player) entity;
+            Player player = (Player) entity;
+
+            if(isOwner(player)) {
+
                 if (player.isSneaking()) {
                     event.setCancelled(true);
                 }
             }
         }
+    }
+
+    public boolean isOwner(Player player) {
+        return (Objects.requireNonNull(config.getString("Owner")).equalsIgnoreCase(player.getName()));
     }
 
 }

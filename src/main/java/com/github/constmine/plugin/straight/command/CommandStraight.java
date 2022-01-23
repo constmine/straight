@@ -29,8 +29,11 @@ public class CommandStraight implements TabExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Player player = (Player) sender;
-        plugin.getConfig().set("Owner", player.getName());
-        Bukkit.getScheduler().runTaskTimer(plugin, new StraightScheduler(player, plugin), 0L, 1L);
+
+        if(Objects.requireNonNull(plugin.getConfig().getString("Owner")).equalsIgnoreCase(" ")) {
+            plugin.getConfig().set("Owner", player.getName());
+            Bukkit.getScheduler().runTaskTimer(plugin, new StraightScheduler(player, plugin), 0L, 1L);
+        }
 
         if(args.length > 0) {
             if (args[0].equalsIgnoreCase("stop")) {

@@ -36,6 +36,7 @@ public class StraightScheduler implements Runnable {
         this.player = player;
         BlockY = player.getLocation().getBlockY() - 1;
         this.plugin = (Straight) plugin;
+        Bukkit.getScheduler().runTaskTimer(plugin, this::entityUp, 0L, 1L);
     }
 
     @Override
@@ -51,7 +52,6 @@ public class StraightScheduler implements Runnable {
         replaceBlockToFallingBlock(player.getWorld(), location);
         giveEffect();
 
-        Bukkit.getScheduler().runTaskTimer(plugin, this::entityUp, 0L, 1L);
     }
 
     public void fillBlock(World world, Location coordinate) {
@@ -87,7 +87,6 @@ public class StraightScheduler implements Runnable {
                     if(isBlockChange(block)) {
                         block.setType(Material.AIR);
                         Location location = block.getLocation();
-
                         fallingBlockUp(world, location, blockData, new Vector(0, 2.5, 0));
                     }
                 }
@@ -104,6 +103,8 @@ public class StraightScheduler implements Runnable {
         fallingBlock.setDropItem(false);
         fallingBlock.setGravity(false);
         fallingBlock.setVelocity(vector);
+
+        Bukkit.getScheduler().runTaskLater(plugin, fallingBlock::remove, 100L);
 
         return fallingBlock;
     }

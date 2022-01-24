@@ -5,3 +5,6 @@
 입력시 해당 플레이어 에게 권한을 줍니다.
 /st stop 
 입력시 Scheduler를 취소합니다.
+
+Version: 1.18.1
+java version : 16
